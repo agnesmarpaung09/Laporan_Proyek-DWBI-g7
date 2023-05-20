@@ -1,0 +1,46 @@
+<Schema name="New Schema3">
+  <Dimension type="StandardDimension" visible="true" foreignKey="createdat" name="Date">
+    <Hierarchy name="Date" visible="true" hasAll="true" primaryKey="createdat">
+      <Table name="dimdate" alias="">
+      </Table>
+      <Level name="Deadline" visible="true" column="deadline" ordinalColumn="createdat" type="Date" internalType="Object" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" foreignKey="countryid" name="Location">
+    <Hierarchy name="Location" visible="true" hasAll="true" primaryKey="CountryId" primaryKeyTable="dimlocation">
+      <Table name="dimlocation" schema="" alias="">
+      </Table>
+      <Level name="CountryName" visible="true" table="dimlocation" column="countryname" ordinalColumn="countryid" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" foreignKey="projectid" name="Project">
+    <Hierarchy name="Project" visible="true" hasAll="true" primaryKey="ProjectId" primaryKeyTable="dimproject">
+      <Table name="dimproject" schema="" alias="">
+      </Table>
+      <Level name="Project Name" visible="true" table="dimproject" column="projectname" ordinalColumn="projectid" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Creator">
+    <Hierarchy name="Creator" visible="true" hasAll="true">
+      <Table name="dimcreator" schema="" alias="">
+      </Table>
+      <Level name="Creator Name" visible="true" table="dimcreator" column="creatorname" ordinalColumn="creatorid" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="FactCampaign " visible="true" cache="true" enabled="true">
+    <Table name="factcampaign" schema="" alias="">
+    </Table>
+    <DimensionUsage source="Date" usagePrefix="Date" name="Date" visible="true" foreignKey="createdat">
+    </DimensionUsage>
+    <DimensionUsage source="Location" usagePrefix="Location" name="Location" visible="true" foreignKey="countryid">
+    </DimensionUsage>
+    <DimensionUsage source="Project" usagePrefix="Project" name="Project" visible="true" foreignKey="projectid">
+    </DimensionUsage>
+    <DimensionUsage source="Creator" usagePrefix="Creator" name="Creator" visible="true" foreignKey="creatorid">
+    </DimensionUsage>
+  </Cube>
+</Schema>
